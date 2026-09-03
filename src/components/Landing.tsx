@@ -25,7 +25,7 @@ function HeroVideoChatAnimation() {
   return (
     <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-950 group">
       {/* Background Video depicting legal office / lawyer working on laptop and reviewing documents */}
-      <div className="w-full h-[400px] md:h-[550px] overflow-hidden relative bg-slate-950">
+      <div className="w-full h-[400px] md:h-[550px] overflow-hidden relative bg-slate-900">
         <video
           src="https://assets.mixkit.co/videos/16106/16106-720.mp4"
           autoPlay
@@ -33,18 +33,15 @@ function HeroVideoChatAnimation() {
           loop
           playsInline
           poster="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=2000"
-          className="w-full h-full object-cover object-center opacity-85"
+          className="w-full h-full object-cover object-center opacity-100"
         >
           <source src="https://assets.mixkit.co/videos/16106/16106-720.mp4" type="video/mp4" />
           <source src="https://assets.mixkit.co/videos/42664/42664-720.mp4" type="video/mp4" />
           <source src="https://assets.mixkit.co/videos/4907/4907-720.mp4" type="video/mp4" />
         </video>
-        {/* Dark gradient overlay for chat contrast and readability */}
-        <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[1px]"></div>
+        {/* Subtle light overlay to ensure soft contrast for chat without darkening the video */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-slate-950/10 pointer-events-none"></div>
       </div>
-
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-slate-950/25 pointer-events-none"></div>
 
       {/* Animated Overlay Chat Container */}
       <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-center items-center pointer-events-none overflow-hidden">
