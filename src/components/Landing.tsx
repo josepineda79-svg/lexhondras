@@ -24,22 +24,23 @@ function HeroVideoChatAnimation() {
 
   return (
     <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-950 group">
-      {/* Background Video depicting woman in beige blazer using smartphone */}
-      <div className="w-full h-[400px] md:h-[550px] overflow-hidden relative">
+      {/* Background Video depicting legal office / lawyer working on laptop and reviewing documents */}
+      <div className="w-full h-[400px] md:h-[550px] overflow-hidden relative bg-slate-950">
         <video
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
-          poster="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=2000"
+          src="https://assets.mixkit.co/videos/16106/16106-720.mp4"
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-95 animate-kenburns scale-105"
-        />
-        <img 
-          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=2000" 
-          alt="Profesional utilizando asistente legal en smartphone"
-          className="absolute inset-0 w-full h-full object-cover opacity-90 animate-kenburns scale-105 pointer-events-none mix-blend-overlay"
-        />
+          poster="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=2000"
+          className="w-full h-full object-cover object-center opacity-85"
+        >
+          <source src="https://assets.mixkit.co/videos/16106/16106-720.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/42664/42664-720.mp4" type="video/mp4" />
+          <source src="https://assets.mixkit.co/videos/4907/4907-720.mp4" type="video/mp4" />
+        </video>
+        {/* Dark gradient overlay for chat contrast and readability */}
+        <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[1px]"></div>
       </div>
 
       {/* Dark overlay for readability */}
