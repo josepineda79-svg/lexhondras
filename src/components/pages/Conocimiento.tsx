@@ -6,29 +6,34 @@ export const Conocimiento = () => {
 
   const sources = [
     {
-      title: "Reglamentos Internacionales",
-      desc: "Tratados internacionales, Reglamentos europeos y comunicaciones de entidades supranacionales.",
-      icon: Flag
+      title: "Diario Oficial La Gaceta de Honduras",
+      desc: "Leyes de la República, Decretos Ejecutivos, Acuerdos Ministeriales y Reglamentos publicados oficialmente.",
+      icon: FileText,
+      detail: "Acceso actualizado diariamente a todas las publicaciones históricas y recientes del Diario Oficial La Gaceta de la República de Honduras."
     },
     {
-      title: "Boletines oficiales",
-      desc: "Leyes orgánicas, Reales decretos y normativas estatales, autonómicas y provinciales.",
-      icon: FileText
+      title: "Jurisprudencia de la Corte Suprema de Justicia (CSJ)",
+      desc: "Sentencias, fallos de inconstitucionalidad, recursos de casación y doctrina procesal sentada por las Salas de la CSJ.",
+      icon: Scale,
+      detail: "Más de 2.5 millones de párrafos jurisprudenciales analizados con silogismo procesal y subsunción forense."
     },
     {
-      title: "Tribunales administrativos",
-      desc: "Resoluciones de tribunales especializados con carácter público.",
-      icon: Landmark
+      title: "Códigos e Instrumentos Legales Vigentes",
+      desc: "Código Procesal Civil (CPC), Código del Trabajo, Código Penal, Código Procesal Penal, Código de Comercio y Código de Familia.",
+      icon: Landmark,
+      detail: "Indexados con Context Caching de 1M+ tokens para respuesta inmediata sin alucinaciones procesales."
     },
     {
-      title: "Regulación administrativa",
-      desc: "Convenios, comunicaciones vinculantes y normativa emitida por entidades públicas.",
-      icon: Briefcase
+      title: "Regulación Administrativa y Financiera (STSS, BCH, SAR)",
+      desc: "Circulares del Banco Central de Honduras (BCH), tablas de salarios mínimos de la Secretaría de Trabajo (STSS) y normativa tributaria (SAR).",
+      icon: Briefcase,
+      detail: "Integrado directamente con el Liquidador Laboral y Financiero con conversión automatizada."
     },
     {
-      title: "Tribunales oficiales",
-      desc: "Sentencias de los tribunales oficiales.",
-      icon: Scale
+      title: "Tratados y Convenios Internacionales de Honduras",
+      desc: "Convenios de la OIT, Tratados de Derechos Humanos y Acuerdos de Integración Centroamericana ratificados por el Congreso Nacional.",
+      icon: Flag,
+      detail: "Fuentes primarias supranacionales aplicables por el principio de supremacía constitucional en derecho hondureño."
     }
   ];
 

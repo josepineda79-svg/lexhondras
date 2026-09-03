@@ -6,8 +6,149 @@ import { Soluciones } from "./pages/Soluciones";
 import { Faq } from "./pages/Faq";
 import { CasosExito } from "./pages/CasosExito";
 import { Blog } from "./pages/Blog";
-import React, { useState } from "react";
-import { ChevronDown, Sparkles, Brain, Gavel, FileText, Scale, Lock, CheckCircle2, Shield, FileLock2, ArrowRight, Menu, Calculator, Download, Users, Landmark, Building2, Play, Check, HelpCircle, FileSearch, FolderOpen, BookOpen, ClipboardList, PenTool } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { ChevronDown, Sparkles, Brain, Gavel, FileText, Scale, Lock, CheckCircle2, Shield, FileLock2, ArrowRight, Menu, Calculator, Download, Users, Landmark, Building2, Play, Pause, Volume2, VolumeX, Maximize2, Check, HelpCircle, FileSearch, FolderOpen, BookOpen, ClipboardList, PenTool, X } from "lucide-react";
+
+// Hero Simulated Chat Overlay Animation component matching user demo video
+function HeroVideoChatAnimation() {
+  const [animStep, setAnimStep] = useState(0);
+
+  React.useEffect(() => {
+    const intervals = [3200, 2000, 2000, 2000, 3500, 6000, 3500, 3500];
+    const timer = setTimeout(() => {
+      setAnimStep((prev) => (prev + 1) % 8);
+    }, intervals[animStep] || 3000);
+
+    return () => clearTimeout(timer);
+  }, [animStep]);
+
+  return (
+    <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-slate-200 bg-slate-950 group">
+      {/* Background Video depicting woman in beige blazer using smartphone */}
+      <div className="w-full h-[400px] md:h-[550px] overflow-hidden relative">
+        <video
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          poster="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=2000"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover opacity-95 animate-kenburns scale-105"
+        />
+        <img 
+          src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=2000" 
+          alt="Profesional utilizando asistente legal en smartphone"
+          className="absolute inset-0 w-full h-full object-cover opacity-90 animate-kenburns scale-105 pointer-events-none mix-blend-overlay"
+        />
+      </div>
+
+      {/* Dark overlay for readability */}
+      <div className="absolute inset-0 bg-slate-950/25 pointer-events-none"></div>
+
+      {/* Animated Overlay Chat Container */}
+      <div className="absolute inset-0 p-4 md:p-8 flex flex-col justify-center items-center pointer-events-none overflow-hidden">
+        <div className="w-full max-w-xl transition-all duration-500 flex flex-col gap-3">
+          
+          {/* User Prompt (Isabel) */}
+          {animStep >= 0 && (
+            <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/80 animate-in fade-in slide-in-from-bottom-3 duration-300 max-w-md self-center text-left">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-6 h-6 rounded-full bg-[#1a7484] text-white flex items-center justify-center text-[11px] font-bold">
+                  I
+                </div>
+                <span className="text-xs font-semibold text-slate-800">Isabel</span>
+              </div>
+              <p className="text-xs md:text-sm text-slate-700 leading-snug font-medium">
+                Hola LexHonduras, ¿me ayudas a redactar una carta de despido disciplinario por ausencias injustificadas?
+              </p>
+            </div>
+          )}
+
+          {/* AI Status Thinking Steps */}
+          {animStep >= 1 && animStep <= 3 && (
+            <div className="bg-white/95 backdrop-blur-md px-5 py-3.5 rounded-2xl shadow-lg border border-white/80 animate-in fade-in zoom-in-95 duration-200 self-center text-left flex items-center gap-3">
+              <div className="w-5 h-5 rounded-full border-2 border-[#1a7484] border-t-transparent animate-spin shrink-0"></div>
+              <div>
+                <span className="text-xs font-bold text-[#1a7484] block mb-0.5">LexHonduras</span>
+                <span className="text-xs text-slate-600 font-medium">
+                  {animStep === 1 && "Consultando las bases de conocimiento..."}
+                  {animStep === 2 && "Filtrando la información relevante..."}
+                  {animStep === 3 && "Preparando respuesta fundamentada..."}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {/* AI Response Introduction */}
+          {animStep >= 4 && animStep <= 6 && (
+            <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/80 animate-in fade-in slide-in-from-bottom-2 duration-300 max-w-lg self-center text-left">
+              <div className="flex items-center gap-2 mb-1.5">
+                <div className="w-6 h-6 rounded-full bg-[#1a7484] text-white flex items-center justify-center">
+                  <Scale className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-xs font-bold text-[#1a7484]">LexHonduras</span>
+              </div>
+              <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
+                Claro que sí. A continuación, te proporciono una propuesta de carta de despido, fundamentada en la normativa y jurisprudencia que me has facilitado.
+              </p>
+            </div>
+          )}
+
+          {/* Document Preview Box */}
+          {animStep === 5 && (
+            <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-5 animate-in fade-in slide-in-from-bottom-4 duration-400 max-w-lg self-center text-left max-h-[200px] overflow-y-auto">
+              <div className="border-b border-slate-100 pb-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#1a7484] bg-[#e8f1f2] px-2 py-0.5 rounded">
+                  Propuesta de Carta de Despido Disciplinario
+                </span>
+                <p className="text-[11px] text-slate-500 mt-1">Asunto: Comunicación de despido disciplinario</p>
+              </div>
+              <div className="text-[11px] text-slate-600 space-y-2 leading-relaxed">
+                <p className="font-semibold text-slate-700">Estimado/a Sr./Sra. [Apellido del trabajador/a],</p>
+                <p>Por medio de la presente, la Dirección de esta empresa le comunica la decisión de proceder a la extinción de su contrato de trabajo por causas disciplinarias...</p>
+                <p className="font-bold text-slate-800 text-[10px] uppercase">HECHOS:</p>
+                <p>1. Se ha constatado que usted ha incurrido en una serie de faltas de asistencia a su puesto de trabajo...</p>
+                <p className="font-bold text-slate-800 text-[10px] uppercase">FUNDAMENTOS DE DERECHO:</p>
+                <p>Su comportamiento constituye una falta muy grave, tipificada en el Artículo 54.2 del Estatuto de los Trabajadores / Código del Trabajo...</p>
+              </div>
+            </div>
+          )}
+
+          {/* Closing AI Message */}
+          {animStep >= 6 && (
+            <div className="bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/80 animate-in fade-in slide-in-from-bottom-2 duration-300 max-w-md self-center text-left">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-6 h-6 rounded-full bg-[#1a7484] text-white flex items-center justify-center">
+                  <Scale className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-xs font-bold text-[#1a7484]">LexHonduras</span>
+              </div>
+              <p className="text-xs text-slate-700">
+                Espero que este modelo te sea de gran utilidad. Si necesitas alguna aclaración o ajuste, no dudes en decírmelo.
+              </p>
+            </div>
+          )}
+
+          {/* Closing User Reply */}
+          {animStep === 7 && (
+            <div className="bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-white/80 animate-in fade-in slide-in-from-bottom-2 duration-300 max-w-xs self-center text-left">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-5 h-5 rounded-full bg-[#1a7484] text-white flex items-center justify-center text-[10px] font-bold">
+                  I
+                </div>
+                <span className="text-xs font-semibold text-slate-800">Isabel</span>
+              </div>
+              <p className="text-xs text-slate-700 font-medium">
+                Muchas gracias! Es un muy buen punto de partida.
+              </p>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+}
 
 interface LandingProps {
   onEnterWorkspace: () => void;
@@ -15,7 +156,9 @@ interface LandingProps {
 
 export function Landing({ onEnterWorkspace }: LandingProps) {
   const [view, setView] = useState('home');
+  const [solucionesTab, setSolucionesTab] = useState('despachos');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeVideoModal, setActiveVideoModal] = useState<{ isOpen: boolean; title: string; videoUrl: string } | null>(null);
   
   // Onboarding State
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -55,18 +198,18 @@ export function Landing({ onEnterWorkspace }: LandingProps) {
           
           {/* Producto Dropdown */}
           <div className="relative group h-full flex items-center">
-            <button onClick={() => setView('producto')} className="flex items-center gap-1 font-medium text-slate-700 hover:text-[#1a7484] transition-colors">
+            <button onClick={() => setView('producto_que_es')} className="flex items-center gap-1 font-medium text-slate-700 hover:text-[#1a7484] transition-colors">
               Producto <ChevronDown className="w-4 h-4 text-slate-400 group-hover:rotate-180 transition-transform duration-200" />
             </button>
             <div className="absolute top-[60px] left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div className="bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 p-2 w-[340px] flex flex-col gap-1">
                 {[
                   { icon: HelpCircle, title: 'Producto', desc: '¿Qué es LexHonduras?', id: 'producto_que_es' },
-                  { icon: FileSearch, title: 'Buscador de Jurisprudencia con IA', desc: 'Más de 2.5 millones', id: 'producto_buscador' },
+                  { icon: FileSearch, title: 'Buscador de Jurisprudencia con IA', desc: 'Más de 2.5 millones de sentencias', id: 'producto_buscador' },
                   { icon: FolderOpen, title: 'Expedientes', desc: 'Organiza y gestiona tus proyectos', id: 'producto_expedientes' },
-                  { icon: BookOpen, title: 'Conocimiento de LexHonduras', desc: 'Fuentes jurídicas', id: 'producto_conocimiento' }
+                  { icon: BookOpen, title: 'Conocimiento de LexHonduras', desc: 'Fuentes jurídicas actualizadas', id: 'producto_conocimiento' }
                 ].map((item, i) => (
-                  <button key={i} onClick={() => setView('recursos_faq')} className="flex items-start gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors text-left w-full">
+                  <button key={i} onClick={() => setView(item.id)} className="flex items-start gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors text-left w-full">
                     <div className="w-10 h-10 bg-[#e8f1f2] rounded-lg flex items-center justify-center shrink-0">
                       <item.icon className="w-5 h-5 text-[#1a7484]" />
                     </div>
@@ -88,12 +231,12 @@ export function Landing({ onEnterWorkspace }: LandingProps) {
             <div className="absolute top-[60px] left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
               <div className="bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 p-2 w-[300px] flex flex-col gap-1">
                 {[
-                  { icon: Scale, title: 'Despachos de abogados' },
-                  { icon: Building2, title: 'Departamentos jurídicos' },
-                  { icon: ClipboardList, title: 'Asesorías y Gestorías' },
-                  { icon: Landmark, title: 'Administraciones públicas' }
+                  { icon: Scale, title: 'Despachos de abogados', tab: 'despachos' },
+                  { icon: Building2, title: 'Departamentos jurídicos', tab: 'departamentos' },
+                  { icon: ClipboardList, title: 'Asesorías y Gestorías', tab: 'asesorias' },
+                  { icon: Landmark, title: 'Administraciones públicas', tab: 'administraciones' }
                 ].map((item, i) => (
-                  <button key={i} onClick={() => setView('soluciones')} className="flex items-center gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors text-left w-full">
+                  <button key={i} onClick={() => { setSolucionesTab(item.tab); setView('soluciones'); }} className="flex items-center gap-4 p-3 hover:bg-slate-50 rounded-xl transition-colors text-left w-full">
                     <div className="w-10 h-10 bg-[#e8f1f2] rounded-lg flex items-center justify-center shrink-0">
                       <item.icon className="w-5 h-5 text-[#1a7484]" />
                     </div>
@@ -290,7 +433,7 @@ export function Landing({ onEnterWorkspace }: LandingProps) {
     return (
       <div className="min-h-screen bg-white flex flex-col font-sans relative selection:bg-[#1a7484]/20">
         <Navigation />
-        <Soluciones onStart={handleStartOnboarding} />
+        <Soluciones onStart={handleStartOnboarding} initialTab={solucionesTab} />
         <Footer />
         {showOnboarding && <OnboardingModal step={onboardingStep} setStep={setOnboardingStep} onClose={closeOnboarding} onComplete={completeOnboarding} termsAccepted={termsAccepted} setTermsAccepted={setTermsAccepted} />}
       </div>
@@ -509,31 +652,17 @@ export function Landing({ onEnterWorkspace }: LandingProps) {
           <p className="text-[19px] text-slate-600 mb-10 max-w-3xl leading-relaxed">
             Reduce el tiempo y aumenta la precisión legal. Creado para abogados y profesionales legales en Honduras.
           </p>
-          <button 
-            onClick={handleStartOnboarding}
-            className="bg-[#1a7484] text-white px-8 py-3.5 text-base font-medium rounded-full hover:bg-[#145d6a] transition-all shadow-lg shadow-[#1a7484]/20 mb-16"
-          >
-            Accede gratis
-          </button>
-
-          {/* Hero Image Block */}
-          <div className="relative w-full max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
-            <img 
-              src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=2000" 
-              alt="Abogada usando LexHonduras" 
-              className="w-full h-[300px] md:h-[500px] object-cover object-top"
-            />
-            {/* Floating Chat UI element mimicking the screenshot */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-12 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 w-[90%] md:w-[350px] flex items-start gap-3">
-              <div className="w-10 h-10 bg-[#e8f1f2] rounded-full flex items-center justify-center shrink-0">
-                <Scale className="w-5 h-5 text-[#1a7484]" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold text-slate-800 mb-1">LexHonduras</p>
-                <p className="text-sm text-slate-600">Hola. He analizado el caso y completado la subsunción. La demanda por despido injustificado está lista para descargar en .docx.</p>
-              </div>
-            </div>
+          <div className="flex items-center justify-center mb-16">
+            <button 
+              onClick={handleStartOnboarding}
+              className="bg-[#1a7484] text-white px-9 py-4 text-lg font-medium rounded-full hover:bg-[#145d6a] transition-all shadow-lg shadow-[#1a7484]/25 hover:scale-105"
+            >
+              Accede gratis
+            </button>
           </div>
+
+          {/* Hero Video Block with Interactive Chat Overlay matching Demo Video */}
+          <HeroVideoChatAnimation />
         </section>
 
         {/* LOGOS SECTION */}
@@ -733,43 +862,71 @@ export function Landing({ onEnterWorkspace }: LandingProps) {
           </div>
         </section>
 
-        {/* HAZ MUCHO MAS (Teal Strip with Scrolling Prompts) */}
-        <section className="py-24 bg-[#235b66] text-white overflow-hidden">
+        {/* HAZ MUCHO MAS (Teal Strip with Double Horizontal Scrolling Marquee Rows) */}
+        <section className="py-24 bg-[#1e505a] text-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">
+            <h2 className="text-4xl md:text-5xl font-serif mb-6 tracking-tight">
               Haz mucho más de lo que habías imaginado
             </h2>
-            <p className="text-lg text-white/80">
-              Todas tus tareas y trabajos impulsados por la IA de LexHonduras.
+            <p className="text-lg text-white/85">
+              Todas tus tareas y trabajos impulsados por la IA de <span className="font-semibold text-white">LexHonduras</span>.
             </p>
           </div>
 
-          {/* Horizontal scrollable cards area */}
-          <div className="flex gap-6 overflow-x-auto pb-8 px-6 max-w-[1400px] mx-auto snap-x hide-scrollbar" style={{ scrollbarWidth: 'none' }}>
-            <div className="shrink-0 w-[300px] bg-white text-slate-800 p-6 rounded-2xl shadow-lg snap-center border-t-4 border-[#1a7484]">
-              <p className="text-sm leading-relaxed">
-                Liquida las <span className="font-bold">prestaciones laborales</span> de un empleado despedido ayer, usando el tipo de cambio del BCH.
-              </p>
+          {/* Double Row Horizontal animated auto-scrolling marquee */}
+          <div className="w-full overflow-hidden relative flex flex-col gap-5">
+            {/* ROW 1 */}
+            <div className="animate-marquee flex gap-5 px-2">
+              {[
+                "Resume esta sentencia en 5 puntos clave para aplicar a mi caso.",
+                "Crea una cláusula de confidencialidad (NDA) para un acuerdo de colaboración.",
+                "Elabora un borrador de un contrato de arras penitenciales.",
+                "Explícame las obligaciones del Código Procesal y redacta la comparecencia.",
+                "Redacta un correo tranquilizando a mi cliente sobre este requerimiento de la SAR.",
+                "Redacta una demanda de reclamación de cantidad por impago de factura.",
+                "Analiza este contrato e identifica cláusulas de riesgo para mi cliente."
+              ].concat([
+                "Resume esta sentencia en 5 puntos clave para aplicar a mi caso.",
+                "Crea una cláusula de confidencialidad (NDA) para un acuerdo de colaboración.",
+                "Elabora un borrador de un contrato de arras penitenciales.",
+                "Explícame las obligaciones del Código Procesal y redacta la comparecencia.",
+                "Redacta un correo tranquilizando a mi cliente sobre este requerimiento de la SAR.",
+                "Redacta una demanda de reclamación de cantidad por impago de factura.",
+                "Analiza este contrato e identifica cláusulas de riesgo para mi cliente."
+              ]).map((text, idx) => (
+                <div key={`r1-${idx}`} className="shrink-0 w-[310px] bg-white text-slate-800 p-5 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300 border-t-4 border-[#1a7484]">
+                  <p className="text-xs md:text-sm font-medium leading-relaxed text-slate-700">
+                    {text}
+                  </p>
+                </div>
+              ))}
             </div>
-            <div className="shrink-0 w-[300px] bg-white text-slate-800 p-6 rounded-2xl shadow-lg snap-center border-t-4 border-[#1a7484]">
-              <p className="text-sm leading-relaxed">
-                Redacta una <span className="font-bold">demanda de reclamación de cantidad</span> por impago de factura mercantil.
-              </p>
-            </div>
-            <div className="shrink-0 w-[300px] bg-white text-slate-800 p-6 rounded-2xl shadow-lg snap-center border-t-4 border-[#1a7484]">
-              <p className="text-sm leading-relaxed">
-                Analiza este contrato e <span className="font-bold">identifica cláusulas de riesgo</span> o abusivas según el Código Civil.
-              </p>
-            </div>
-            <div className="shrink-0 w-[300px] bg-white text-slate-800 p-6 rounded-2xl shadow-lg snap-center border-t-4 border-[#1a7484]">
-              <p className="text-sm leading-relaxed">
-                Resume esta sentencia de la <span className="font-bold">Corte Suprema</span> en 5 puntos clave para aplicar a mi caso en casación.
-              </p>
-            </div>
-            <div className="shrink-0 w-[300px] bg-white text-slate-800 p-6 rounded-2xl shadow-lg snap-center border-t-4 border-[#1a7484]">
-              <p className="text-sm leading-relaxed">
-                Crea un <span className="font-bold">contrato de arrendamiento</span> para un local comercial en Tegucigalpa.
-              </p>
+
+            {/* ROW 2 */}
+            <div className="animate-marquee-reverse flex gap-5 px-2">
+              {[
+                "Convierte este informe técnico en un email que un cliente pueda entender.",
+                "Extrae las obligaciones y plazos del documento adjunto y crea una tabla.",
+                "Busca jurisprudencia reciente sobre el uso de cámaras de videovigilancia en el trabajo.",
+                "Dame 5 argumentos a favor y en contra en un caso de vicios ocultos.",
+                "Ayúdame a preparar una contestación a una demanda usando estos documentos que te adjunto.",
+                "Redacta una carta de despido disciplinario por ausencias injustificadas.",
+                "Liquida las prestaciones laborales de un empleado despedido ayer, usando el tipo de cambio del BCH."
+              ].concat([
+                "Convierte este informe técnico en un email que un cliente pueda entender.",
+                "Extrae las obligaciones y plazos del documento adjunto y crea una tabla.",
+                "Busca jurisprudencia reciente sobre el uso de cámaras de videovigilancia en el trabajo.",
+                "Dame 5 argumentos a favor y en contra en un caso de vicios ocultos.",
+                "Ayúdame a preparar una contestación a una demanda usando estos documentos que te adjunto.",
+                "Redacta una carta de despido disciplinario por ausencias injustificadas.",
+                "Liquida las prestaciones laborales de un empleado despedido ayer, usando el tipo de cambio del BCH."
+              ]).map((text, idx) => (
+                <div key={`r2-${idx}`} className="shrink-0 w-[310px] bg-white text-slate-800 p-5 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300 border-t-4 border-[#1a7484]">
+                  <p className="text-xs md:text-sm font-medium leading-relaxed text-slate-700">
+                    {text}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -911,6 +1068,43 @@ export function Landing({ onEnterWorkspace }: LandingProps) {
 
       <Footer />
       
+      {/* Video Demonstration Modal */}
+      {activeVideoModal && activeVideoModal.isOpen && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-slate-900 w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl border border-slate-700 flex flex-col">
+            <div className="p-4 bg-slate-800 border-b border-slate-700 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <h3 className="text-sm font-semibold text-white">{activeVideoModal.title}</h3>
+              </div>
+              <button 
+                onClick={() => setActiveVideoModal(null)}
+                className="p-1.5 text-slate-400 hover:text-white hover:bg-slate-700 rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="relative aspect-video bg-black flex items-center justify-center">
+              <video 
+                src={activeVideoModal.videoUrl} 
+                controls 
+                autoPlay 
+                className="w-full h-full object-contain"
+              />
+            </div>
+            <div className="p-4 bg-slate-800 text-xs text-slate-400 flex items-center justify-between">
+              <span>LexHonduras IA • Demostración interactiva de procesamiento forense</span>
+              <button 
+                onClick={() => { setActiveVideoModal(null); handleStartOnboarding(); }}
+                className="bg-[#1a7484] hover:bg-[#145d6a] text-white px-4 py-1.5 rounded-full font-medium transition-colors"
+              >
+                Probar gratis ahora
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showOnboarding && <OnboardingModal step={onboardingStep} setStep={setOnboardingStep} onClose={closeOnboarding} onComplete={completeOnboarding} termsAccepted={termsAccepted} setTermsAccepted={setTermsAccepted} />}
     </div>
   );
@@ -929,204 +1123,230 @@ function OnboardingModal({ step, setStep, onClose, onComplete, termsAccepted, se
     }
   };
 
-  const ProgressDots = ({ current, total }: { current: number, total: number }) => (
-    <div className="flex justify-center items-center gap-4 mb-8 relative">
-      {/* Connector Line */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[1px] bg-slate-200 -z-10"></div>
-      
-      {Array.from({ length: total }).map((_, i) => (
-        <div 
-          key={i} 
-          className={`w-6 h-6 rounded-full flex items-center justify-center bg-white border-2 transition-colors z-10
-            ${i < current ? 'border-[#5bc7d6] bg-[#5bc7d6]' : 
-              i === current ? 'border-[#5bc7d6]' : 'border-slate-300'}
-          `}
-        >
-          {i < current && <Check className="w-3 h-3 text-white" />}
-        </div>
-      ))}
-    </div>
-  );
+  const totalSteps = 4;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-gradient-to-br from-[#9ce3ec] to-[#60c4d5]">
-      <div className="min-h-full w-full flex items-center justify-center py-8 px-4">
-      
-      {step === 0 && (
-        <div className="bg-white w-full max-w-[500px] rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-300">
-          <div className="p-10 flex flex-col items-center text-center">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-[#1a7484] rounded-full flex items-center justify-center">
-                <Scale className="w-5 h-5 text-white" />
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4">
+      <div className="bg-white w-full max-w-[620px] max-h-[92vh] rounded-2xl shadow-2xl overflow-hidden flex flex-col my-auto border border-slate-100 animate-in fade-in zoom-in-95 duration-200">
+        
+        {/* Sticky Top Bar for 100% Zoom Visibility */}
+        <div className="bg-slate-50 border-b border-slate-200 px-5 py-3 flex items-center justify-between shrink-0">
+          <div>
+            {step > 0 ? (
+              <button 
+                onClick={() => setStep(step - 1)}
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-100 font-medium text-xs shadow-sm transition-colors"
+              >
+                ◀ Atrás
+              </button>
+            ) : (
+              <div className="flex items-center gap-1.5">
+                <Scale className="w-4 h-4 text-[#1a7484]" />
+                <span className="text-xs font-bold text-slate-700 font-serif">lexhonduras</span>
               </div>
-              <span className="text-3xl font-serif text-slate-800 tracking-tight">lexhonduras</span>
-            </div>
-            
-            <h2 className="text-[22px] font-bold text-slate-800 leading-tight mb-2">
-              Por favor, acepta nuestros<br/>términos y políticas para continuar
-            </h2>
-            <p className="text-sm text-slate-500 mb-8">
-              Al continuar, aceptas las condiciones mencionadas.
-            </p>
-            
-            <div className="w-full flex items-start gap-3 mb-8 text-left">
-              <div className="mt-1">
-                 <input 
-                   type="checkbox" 
-                   id="terms" 
-                   checked={termsAccepted}
-                   onChange={(e) => setTermsAccepted(e.target.checked)}
-                   className="w-4 h-4 rounded border-gray-300 text-[#3a4149] focus:ring-[#3a4149] cursor-pointer"
-                 />
-              </div>
-              <label htmlFor="terms" className="text-sm text-slate-700 cursor-pointer">
-                He leído y acepto los Términos de Servicio y la Política de Privacidad
-              </label>
-            </div>
-            
-            <button 
-              onClick={() => setStep(1)}
-              disabled={!termsAccepted}
-              className={`w-full py-3.5 rounded-lg font-medium text-white transition-colors flex items-center justify-center gap-2
-                ${termsAccepted ? 'bg-[#374151] hover:bg-slate-800' : 'bg-slate-300 cursor-not-allowed'}
-              `}
-            >
-              Continuar <span className="text-xs">▶</span>
-            </button>
+            )}
           </div>
-          
-          <div className="bg-[#f9fafb] border-t border-slate-100 flex flex-col">
-            <div className="py-4 border-b border-slate-100 text-center">
-              <p className="text-sm text-slate-500">¿Tiene una cuenta? <button className="font-medium text-slate-700 hover:underline" onClick={onComplete}>Entrar</button></p>
-            </div>
-            <div className="py-4 text-center flex justify-center gap-4 text-sm text-slate-500">
-              <button className="hover:text-slate-700">Privacidad</button>
-              <button className="hover:text-slate-700">Términos</button>
-            </div>
-          </div>
-        </div>
-      )}
 
-      {step === 1 && (
-        <div className="flex flex-col items-center">
-          <ProgressDots current={0} total={5} />
-          <p className="text-xs text-slate-500 mb-4">Paso 1: Sobre ti</p>
-          
-          <div className="bg-white w-full max-w-[600px] rounded-2xl shadow-2xl p-6 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h2 className="text-2xl font-serif text-slate-900 text-center mb-8">
-              ¿En qué áreas del derecho ejerces?
-            </h2>
-            
-            <div className="grid grid-cols-2 gap-y-3 gap-x-6 mb-6">
-              {['Civil y familia', 'Penal y económico', 'Administrativo y público', 'Extranjería e inmigración', 'Mercantil y empresa', 'Fiscal y tributario', 'Digital, IP y datos', 'Derecho procesal', 'Laboral', 'Inmobiliario y urbanismo', 'Bancario y seguros', 'Otro'].map(area => (
-                <div key={area} className="flex items-center gap-3">
-                  <input 
-                    type="checkbox" 
-                    id={`area-${area}`}
-                    checked={selectedAreas.includes(area)}
-                    onChange={() => toggleArea(area)}
-                    className="w-4 h-4 rounded border-gray-300 text-[#5bc7d6] focus:ring-[#5bc7d6] cursor-pointer"
-                  />
-                  <label htmlFor={`area-${area}`} className="text-sm text-slate-700 cursor-pointer">{area}</label>
-                </div>
-              ))}
-            </div>
-            
-            <div className="flex justify-end">
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-slate-500 bg-slate-200/60 px-2.5 py-1 rounded-full">
+              Paso {step + 1} de {totalSteps}
+            </span>
+          </div>
+
+          <div>
+            {step === 0 && (
+              <button 
+                onClick={() => setStep(1)}
+                disabled={!termsAccepted}
+                className={`px-4 py-1.5 rounded-lg font-medium text-xs text-white transition-colors flex items-center gap-1 shadow-sm
+                  ${termsAccepted ? 'bg-[#1a7484] hover:bg-[#145d6a]' : 'bg-slate-300 cursor-not-allowed'}
+                `}
+              >
+                Continuar ▶
+              </button>
+            )}
+            {step === 1 && (
               <button 
                 onClick={() => setStep(2)}
-                className="bg-[#6cd0dd] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#5bc7d6] transition-colors"
+                className="px-4 py-1.5 rounded-lg font-medium text-xs text-white bg-[#1a7484] hover:bg-[#145d6a] transition-colors shadow-sm"
               >
-                Siguiente
+                Siguiente ▶
               </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {step === 2 && (
-        <div className="flex flex-col items-center">
-          <ProgressDots current={1} total={5} />
-          <p className="text-xs text-slate-500 mb-4">Paso 2: Uso principal</p>
-          
-          <div className="bg-white w-full max-w-[600px] rounded-2xl shadow-2xl p-6 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h2 className="text-2xl font-serif text-slate-900 text-center mb-2">
-              ¿Cuál será el uso principal que le darás a LexHonduras?
-            </h2>
-            <p className="text-center text-sm text-slate-500 mb-8">
-              Selecciona las opciones para personalizar tu visita guiada:
-            </p>
-            
-            <div className="grid grid-cols-2 gap-4 mb-6">
-               {[
-                 { title: 'Investigación jurídica', desc: 'Búsqueda de jurisprudencia, leyes y doctrina', icon: '🔍' },
-                 { title: 'Redacción de escritos', desc: 'Generación de demandas, contratos y correos', icon: '✍️' },
-                 { title: 'Revisión de documentos', desc: 'Auditoría de contratos, detección de riesgos y cláusulas', icon: '🛡️' },
-                 { title: 'Análisis de expedientes', desc: 'Síntesis de hechos, cronologías y extracción de datos', icon: '🗂️' },
-                 { title: 'Estrategia y "brainstorming"', desc: 'Preparación de juicios y búsqueda de argumentos', icon: '💡' }
-               ].map((item, idx) => {
-                 const isSelected = selectedAreas.includes(item.title);
-                 return (
-                 <button 
-                   key={idx} 
-                   onClick={() => toggleArea(item.title)}
-                   className={`border rounded-xl p-3 text-center transition-all outline-none ${isSelected ? 'border-[#1a7484] bg-[#e8f1f2]/50 ring-1 ring-[#1a7484]' : 'border-slate-200 hover:border-[#5bc7d6] hover:shadow-sm'}`}
-                 >
-                   <div className="text-2xl mb-2">{item.icon}</div>
-                   <h4 className="text-sm font-bold text-slate-800 mb-1">{item.title}</h4>
-                   <p className="text-[11px] text-slate-500 leading-tight">{item.desc}</p>
-                 </button>
-               )})}
-            </div>
-            
-            <div className="flex justify-between items-center">
-              <button onClick={() => setStep(1)} className="text-slate-600 font-medium text-sm hover:text-slate-900">Atrás</button>
+            )}
+            {step === 2 && (
+              <button 
+                onClick={() => setStep(3)}
+                className="px-4 py-1.5 rounded-lg font-medium text-xs text-white bg-[#1a7484] hover:bg-[#145d6a] transition-colors shadow-sm"
+              >
+                Continuar ▶
+              </button>
+            )}
+            {step === 3 && (
               <button 
                 onClick={onComplete}
-                className="bg-[#1a7484] text-white px-6 py-2.5 rounded-lg font-medium hover:bg-[#145d6a] transition-colors"
+                className="px-4 py-1.5 rounded-lg font-medium text-xs text-white bg-[#1a7484] hover:bg-[#145d6a] transition-colors shadow-sm"
               >
-                Continuar
+                Finalizar ▶
               </button>
-            </div>
+            )}
           </div>
         </div>
-      )}
 
-      {step === 3 && (
-        <div className="flex flex-col items-center">
-          <ProgressDots current={2} total={5} />
-          <p className="text-xs text-slate-500 mb-4">Paso 3: Entorno</p>
-          
-          <div className="bg-white w-full max-w-[500px] rounded-2xl shadow-2xl p-6 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <h2 className="text-2xl font-serif text-slate-900 text-center mb-8">
-              Entorno de trabajo
-            </h2>
-            
-            <div className="flex flex-col gap-2 mb-6">
-               {[
-                 'Autónomo o profesional independiente',
-                 'Despacho de abogados o Firma legal',
-                 'Departamento legal de empresa (in-house)',
-                 'Asesoría / Gestoría',
-                 'Sector público y administración',
-                 'Estudiante u Opositor'
-               ].map((env, idx) => (
-                 <button 
-                  key={idx} 
-                  onClick={onComplete} // Auto-advance on selection
-                  className="w-full text-left border border-slate-200 rounded-lg p-3 text-sm text-slate-700 hover:border-[#5bc7d6] hover:bg-[#f8fcfd] hover:text-slate-900 transition-colors"
-                 >
-                   {env}
-                 </button>
-               ))}
+        {/* Scrollable Modal Content */}
+        <div className="p-6 overflow-y-auto flex-1 max-h-[62vh]">
+          {step === 0 && (
+            <div className="flex flex-col items-center text-center">
+              <div className="w-12 h-12 bg-[#e8f1f2] rounded-full flex items-center justify-center mb-4">
+                <Scale className="w-6 h-6 text-[#1a7484]" />
+              </div>
+              <h2 className="text-xl font-bold text-slate-800 leading-snug mb-2">
+                Acepta nuestros términos y políticas para comenzar
+              </h2>
+              <p className="text-xs text-slate-500 mb-6">
+                Accede al sistema experto legal con IA para Honduras.
+              </p>
+              
+              <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 mb-6 text-left">
+                <div className="flex items-start gap-3">
+                  <input 
+                    type="checkbox" 
+                    id="terms" 
+                    checked={termsAccepted}
+                    onChange={(e) => setTermsAccepted(e.target.checked)}
+                    className="w-4 h-4 mt-0.5 rounded border-gray-300 text-[#1a7484] focus:ring-[#1a7484] cursor-pointer"
+                  />
+                  <label htmlFor="terms" className="text-xs text-slate-700 cursor-pointer leading-relaxed">
+                    He leído y acepto los <strong>Términos de Servicio</strong> y la <strong>Política de Privacidad y Tratamiento de Datos</strong> para el uso del software legal LexHonduras.
+                  </label>
+                </div>
+              </div>
             </div>
-            
-            <div className="flex justify-start">
-              <button onClick={() => setStep(2)} className="text-slate-600 font-medium text-sm hover:text-slate-900">Atrás</button>
+          )}
+
+          {step === 1 && (
+            <div>
+              <h2 className="text-lg font-serif text-slate-900 text-center mb-2">
+                ¿En qué áreas del derecho ejerces?
+              </h2>
+              <p className="text-xs text-slate-500 text-center mb-6">
+                Selecciona una o más áreas de especialidad para personalizar tus respuestas:
+              </p>
+              
+              <div className="grid grid-cols-2 gap-2.5 mb-2">
+                {['Civil y familia', 'Penal y económico', 'Administrativo y público', 'Extranjería e inmigración', 'Mercantil y empresa', 'Fiscal y tributario', 'Digital, IP y datos', 'Derecho procesal', 'Laboral', 'Inmobiliario y urbanismo', 'Bancario y seguros', 'Otro'].map(area => (
+                  <button
+                    key={area}
+                    onClick={() => toggleArea(area)}
+                    className={`flex items-center gap-2 p-2.5 rounded-lg border text-xs text-left transition-all ${
+                      selectedAreas.includes(area)
+                        ? 'border-[#1a7484] bg-[#e8f1f2] font-semibold text-[#1a7484]'
+                        : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                    }`}
+                  >
+                    <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center ${selectedAreas.includes(area) ? 'bg-[#1a7484] border-[#1a7484]' : 'border-slate-300'}`}>
+                      {selectedAreas.includes(area) && <Check className="w-2.5 h-2.5 text-white" />}
+                    </div>
+                    <span>{area}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          {step === 2 && (
+            <div>
+              <h2 className="text-lg font-serif text-slate-900 text-center mb-2">
+                ¿Cuál será el uso principal que le darás a LexHonduras?
+              </h2>
+              <p className="text-xs text-slate-500 text-center mb-6">
+                Selecciona las funciones que más utilizas:
+              </p>
+              
+              <div className="grid grid-cols-2 gap-3 mb-2">
+                 {[
+                   { title: 'Investigación jurídica', desc: 'Búsqueda de jurisprudencia y doctrina', icon: '🔍' },
+                   { title: 'Redacción de escritos', desc: 'Generación de demandas en Word .docx', icon: '✍️' },
+                   { title: 'Revisión de documentos', desc: 'Auditoría y detección de riesgos', icon: '🛡️' },
+                   { title: 'Análisis de expedientes', desc: 'Síntesis y extracción de hechos', icon: '🗂️' },
+                   { title: 'Subsunción Forense', desc: 'Silogismo procesal automático', icon: '⚖️' }
+                 ].map((item, idx) => {
+                   const isSelected = selectedAreas.includes(item.title);
+                   return (
+                   <button 
+                     key={idx} 
+                     onClick={() => toggleArea(item.title)}
+                     className={`border rounded-xl p-3 text-center transition-all outline-none ${isSelected ? 'border-[#1a7484] bg-[#e8f1f2] ring-1 ring-[#1a7484]' : 'border-slate-200 hover:border-slate-300'}`}
+                   >
+                     <div className="text-xl mb-1">{item.icon}</div>
+                     <h4 className="text-xs font-bold text-slate-800 mb-0.5">{item.title}</h4>
+                     <p className="text-[10px] text-slate-500 leading-tight">{item.desc}</p>
+                   </button>
+                 )})}
+              </div>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div>
+              <h2 className="text-lg font-serif text-slate-900 text-center mb-2">
+                Entorno de trabajo
+              </h2>
+              <p className="text-xs text-slate-500 text-center mb-6">
+                Indica tu perfil profesional:
+              </p>
+              
+              <div className="flex flex-col gap-2 mb-2">
+                 {[
+                   'Autónomo o profesional independiente',
+                   'Despacho de abogados o Firma legal',
+                   'Departamento legal de empresa (in-house)',
+                   'Asesoría / Gestoría',
+                   'Sector público y administración',
+                   'Estudiante u Opositor'
+                 ].map((env, idx) => (
+                   <button 
+                    key={idx} 
+                    onClick={onComplete}
+                    className="w-full text-left border border-slate-200 rounded-xl p-3 text-xs text-slate-700 hover:border-[#1a7484] hover:bg-[#e8f1f2] transition-all font-medium"
+                   >
+                     {env}
+                   </button>
+                 ))}
+              </div>
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Bottom Action Bar */}
+        <div className="bg-slate-50 border-t border-slate-200 px-6 py-3 flex items-center justify-between shrink-0">
+          {step > 0 ? (
+            <button 
+              onClick={() => setStep(step - 1)} 
+              className="text-xs text-slate-600 font-medium hover:text-slate-900 transition-colors"
+            >
+              ◀ Volver al paso anterior
+            </button>
+          ) : (
+            <span className="text-[11px] text-slate-400">LexHonduras AI Legal Platform</span>
+          )}
+
+          {step < 3 ? (
+            <button 
+              onClick={() => setStep(step + 1)} 
+              disabled={step === 0 && !termsAccepted}
+              className="px-5 py-2 bg-[#1a7484] text-white rounded-lg text-xs font-semibold hover:bg-[#145d6a] transition-colors shadow-sm disabled:opacity-50"
+            >
+              Continuar ▶
+            </button>
+          ) : (
+            <button 
+              onClick={onComplete} 
+              className="px-5 py-2 bg-[#1a7484] text-white rounded-lg text-xs font-semibold hover:bg-[#145d6a] transition-colors shadow-sm"
+            >
+              Entrar al Workspace
+            </button>
+          )}
+        </div>
 
       </div>
     </div>
